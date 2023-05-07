@@ -1,85 +1,106 @@
-// Set API key and base URL
-const apiKey = 'YOUR_API_KEY';
-const baseUrl = 'https://api.openweathermap.org/data/2.5/';
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
-// Select HTML elements
-const searchInput = document.getElementById('searchInput');
-const currentSection = document.getElementById('current-section');
-const previousSection = document.getElementById('previous-section');
-const futureSection = document.getElementById('future-section');
+  let days = [
+    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+  ];
 
-// Event listener for search input
-searchInput.addEventListener('keyup', function (event) {
-  if (event.keyCode === 13) { // Enter key
-    searchWeather(searchInput.value);
-  }
-});
-
-// Function to fetch weather data
-function searchWeather(query) {
-  const endpoint = `${baseUrl}weather?q=${query}&appid=${apiKey}&units=metric`;
-  fetch(endpoint)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      updateCurrentWeather(data);
-      searchForecast(data.coord);
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Unable to get weather data. Please try again.');
-    });
+  let day = days[date.getDay()];
+  return `${day}, ${formatHours(timestamp)}`;
 }
 
-// Function to update current weather section
-function updateCurrentWeather(data) {
-  const { name, weather, main, wind } = data;
-  const icon = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
-  const html = `
-    <div class="card bg-secondary shadow-lg">
-      <div class="card-body text-center">
-        <h2 class="card-title">${name}</h2>
-        <img src="${icon}" alt="${weather[0].description}" class="card-img">
-        <h3 class="card-subtitle">${weather[0].description}</h3>
-        <p class="card-text">${Math.round(main.temp)} &deg;C</p>
-        <p class="card-text">Feels like ${Math.round(main.feels_like)} &deg;C</p>
-        <p class="card-text">Humidity ${main.humidity}%</p>
-        <p class="card-text">Wind ${wind.speed} m/s</p>
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0{minutes}`;
+  }
+
+  return `${hours}${minutes}`;
+}
+
+function displayTemperature(response) {
+  let temperatureElement = document.querySelector("#temp");
+  let cityElement = document.querySelector("#city");
+  let descriptionElement = document.querySelector("#description");
+  let humidityElement = document.querySelector("#humidity");
+  let windspeedElement = document.querySelector("#windspeed");
+  let dateElement = document.querySelector("#date");
+  let iconElement = document.querySelector("#icon");
+
+  celciusTemperature = response.data.main.temp;
+
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
+  cityElement.innerHTML = response.data.name;
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  humidityElement.innerHTML = response.data.main.humidity;
+  windspeedElement.innerHTML = Math.round(response.data.wind.speed);
+  DataElement.innerHTML = formatDate(response.data.dt * 1000);
+  iconElement.setAttribute("");
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+    <div class="col-2">
+      <p class="future_times">${formatHours(forecast.dt * 1000)}</p>
+      <img 
+      class="weather-icon-images"
+      width="50px"
+      src=""
+      alt=""
+      />
+      <p class="future_times"><strong>${Math.round(
+        forecast.main.temp_max
+      )}</strong> ${Mathround(forecast.main.temp_min)}</p>
       </div>
-    </div>`;
-  currentSection.innerHTML = html;
-}
-
-// Function to fetch forecast data
-function searchForecast(coord) {
-  const endpoint = `${baseUrl}onecall?lat=${coord.lat}&lon=${coord.lon}&appid=${apiKey}&units=metric`;
-  fetch(endpoint)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      updateForecast(data.daily);
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Unable to get forecast data. Please try again.');
-    });
-}
-
-// Function to update forecast sections
-function updateForecast(forecastData) {
-  let previousHtml = '';
-  let futureHtml = '';
-  for (let i = 1; i <= 3; i++) {
-    const { dt, temp, weather } = forecastData[i];
-    const icon = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
-    const date = dayjs.unix(dt).format('ddd D MMM');
-    const html = `
-      <div class="card w-100 bg-info shadow-sm">
-        <div class="card-body text-center">
-          <h3 class="card-title">${date}</h3>
-          <img src="${icon}" alt="${weather[0].description}" class="card-img">
-          <h4 class="card-subtitle">${weather[0].description}</h4>
-          <p class="card-text">${Math.round(temp.day)} &deg;C</p>
-        </div> `
+      `;
   }
-};
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 32;
+  celciusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let temperatureElement = document.querySelector("temp");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function changeBackground() {
+  let backgroundImageElement = document.querySelector("#background-image");
+  let date = new Date();
+  let hours = date.getHours();
+  if (hours < 12) {
+    backgroundImageElement.setAttribute("");
+  } else if (hours < 20) {
+    backgroundImageElement.setAttribute("");
+  }
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+search("");
+changeBackground();
