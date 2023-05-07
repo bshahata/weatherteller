@@ -56,9 +56,7 @@ function displayForecast(response) {
       <img 
       class="weather-icon-images"
       width="50px"
-      src="http://openweathermap.org/img/wn/${
-        forecast.weather[0].icon
-      }@2x.png"
+      src="${weatherIcon}"
       alt=""
       />
       <p class="future_times"><strong>${Math.round(
@@ -112,6 +110,8 @@ function getWeatherIcon(value) {
     default:
       icon = "./assets/img/sunnyIcon.png";
   }
+
+  return icon;
 }
 
 

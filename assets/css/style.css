@@ -1,131 +1,68 @@
-body {
-    background-color: #dee2f6;
-    color: #fff;
-    font-family: "Lato", sans-serif;
-    margin-top: 20px;
+/* Add margin to header and footer */
+header, footer {
+    margin: 20px 0;
   }
   
-  .container {
-    background-color: white;
-    border-radius: 30px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-    height: 600px;
-    padding-left: 20px;
-    width: 460px;
-  }
-  
-  .form-section {
-    padding-top: 30px;
-  }
-  
-  .form-button-row {
-    margin: 0;
-    width: 100%;
-  }
-  
-  .weather-app-wrapper {
-    padding-top: 35px;
-  }
-  
-  .form-control {
-    background-color: #fff;
-  }
-  
-  .fa-search-location {
-    color: #fff;
-    font-size: 20px;
-  }
-  
-  .btn {
-    background-color: #bdc2e8;
-  }
-  .btn:hover {
-    background-color: #828bd1;
-  }
-  
-  .header-section {
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 26px;
-    padding: 0;
-  }
-  
-  .weather-temperature img {
-    height: 64px;
-    margin-left: -20px;
-    width: 64px;
-  }
-  .temperature {
-    font-size: 42px;
-  }
-  
-  .superscript-conversion {
-    font-size: 13px;
-    top: -21px;
-  }
-  
-  .units .active {
-    color: #fff;
-    cursor: default;
-  }
-  
-  .units .active:hover {
-    text-decoration: none;
-  }
-  
-  ul {
+  /* Increase spacing between elements */
+  .container, .week-forecast {
     margin-bottom: 30px;
-    padding: 0;
+  }
+  
+  .form-section, .weather-app-wrapper {
+    margin-bottom: 20px;
   }
   
   li {
-    height: 18px;
-    list-style-type: none;
-    margin-top: 5px;
-    padding: 0px;
+    margin-top: 10px;
   }
   
-  li::first-letter {
-    text-transform: capitalize;
+  /* Use a smaller font size for smaller text */
+  .weather_specifics, .other-weather, .future_temps, .future_times {
+    font-size: 12px;
   }
   
-  .weather_specifics {
-    font-size: 14px;
-    padding: 0px;
-    text-align: left;
+  /* Use a larger font size for the header */
+  .header-section {
+    font-size: 32px;
   }
   
-  .other-weather {
-    font-size: 14px;
-  }
-  
-  .week-forecast {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-    margin-left: 2px;
-    height: 130px;
-    padding: 15px 0 20px 2px;
-  
-    width: 410px;
-  }
-  
-  .future_times,
-  .future_temps {
-    color: #000;
-    font-size: 11px;
-  }
-  
-  .future_times {
-    margin: 5px;
-  }
-  
-  .weather-icon-images {
-    margin: 0 5px 5px -7px;
-  }
-  
+  /* Reduce the font size of the footer */
   footer {
-    color: black;
-    font-size: 11px;
-    padding: 10px;
-    text-align: center;
+    font-size: 10px;
   }
+  
+  /* Increase the size of the temperature display */
+  .temperature {
+    font-size: 60px;
+  }
+  
+  /* Add padding to the left of the temperature display */
+  .weather-temperature {
+    padding-left: 20px;
+  }
+  
+  /* Increase the size of the weather icons */
+  .weather-icon-images img {
+    height: 80px;
+    width: 80px;
+  }
+  
+  /* Add more padding to the week forecast elements */
+  .week-forecast .future_times, .week-forecast .future_temps {
+    padding: 5px;
+  }
+  
+  /* Remove margin on the first li element */
+  li:first-child {
+    margin-top: 0;
+  }
+  
+  /* Increase the padding of the form button row */
+  .form-button-row {
+    padding: 20px;
+  }
+
+.weather-icon-images img {
+    height: 50px;
+    width: 50px;
+}
