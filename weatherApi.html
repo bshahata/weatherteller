@@ -22,45 +22,75 @@
             <div class="col-8 col-sm-6 col-md-6 col-lg-4">
                 <h1 class="fs-3 text-light">Weather</h1>
             </div>
+    <body>
+        <div class="container">
+            <div class="weather-app-wrapper">
+                <form id="search-from" class="mb-3">
+                    <div class="row">
+                        <div class="col-9">
+                            <input
+                            class="form-control"
+                            id="city-input"
+                            type="search"
+                            placeholder="Search City"
+                            autocomplete="off"
+                            />
+                        </div>
+                        <button type="submit" value="search" class="btn w-100">
+                            <i class="fas fa-search-location"></i>
+                        </button>
+                    </div>
+                </form>
+       
+            <div class="row">
+                <div class="col-12">
+                    <img
+                    class="card-img"
+                    id="background-image"
+                    src="http://placehold.it/"
+                    alt="Card image"
+                    />
+                    <div class="card-img-overlay">
+                        <div class="card-body">
+                            <h1 class="header-section">
+                                <span id="city"></span>
+                            </h1>
+                            <ul class="weather_specifics" id="description">
+                                <li class="date-time" id="date"></li>
+                                <li class="weather_specifics" id="description">
+                                    mostly cloudy
+                                </li>
+                            </ul>
+                            <div class="clearfix weather-temperature">
+                                <img src="" alt="Clear" id="icon" class="float-left"/>
+                                <h2 class="temperature">
+                                <span class="temp" id="temp"></span>
+                                <span class="units">
+                                    <sup class="superscript-conversion">
+                                        <a href="#" id="celcius-link" class="active">C</a>
+                                        <a href="#" id="fahrenheit-link">F</a>
+                                    </sup>
+                                </span>
+                            </h2>
+                            </div>
+                            <div class="extra-weather">
+                                <ul class="other-weather">
+                                    <li>Humidity: <span id="humidity">61</span>%</li>
+                                    <li>Wind: <span id="windspeed">3</span>mph</li>
+                                </ul>
+                            </div>
+                        </div>
 
-            <div id="search-bar" class="col-sm-12 col-md-6 col-lg-4">
-                <div class="input-group mb-3">
-                    <span class="input-group-text material-symbols-outlined">Search</span>
-                    <input id="searchInput" type="text" class="form-control" placeholder="Search" aria-label="Search">
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="container-fluid">
-
-        <div id="current" class="row bg-secondary">
-            <div class="col-6">
-                <div id="current-section">
-                    <!-- Cards built in JS -->
-                </div>
-            </div>
-        </div>
-
-        <div class="row bg-info">
-            <div id="previous-section" class="col-md-12 col-lg-3 p-1">
-                <div class="card w-100 fs-1 bg-light shadow">
-                    <div class="card-body d-grid gap-2">
-                        <div class="row">
-                            <!-- Cards built in JS -->
+                        <div class="row weeks-forecast" id="forecast">
+                            <div class="col12">
+                                <div style="text-align: center" class="row"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div id="future-section" class="col-md-12 col-lg-9 p-1">
-                <div class="row justify-content-evenly">
-                    <!-- Cards built in JS -->
-                </div>
-            </div>
         </div>
-
-    </main>
+    </body>
 
     <footer class="container-fluid float-end bg-primary">
         <div class="text-center text-light">
