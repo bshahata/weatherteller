@@ -32,7 +32,6 @@ function displayTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let windspeedElement = document.querySelector("#windspeed");
   let dateElement = document.querySelector("#date");
-  let iconElement = document.querySelector("#icon");
 
   celciusTemperature = response.data.main.temp;
 
@@ -42,8 +41,6 @@ function displayTemperature(response) {
   humidityElement.innerHTML = response.data.main.humidity;
   windspeedElement.innerHTML = Math.round(response.data.wind.speed);
   DataElement.innerHTML = formatDate(response.data.dt * 1000);
-  iconElement.setAttribute("");
-  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function displayForecast(response) {
@@ -59,7 +56,9 @@ function displayForecast(response) {
       <img 
       class="weather-icon-images"
       width="50px"
-      src=""
+      src="http://openweathermap.org/img/wn/${
+        forecast.weather[0].icon
+      }@2x.png"
       alt=""
       />
       <p class="future_times"><strong>${Math.round(
@@ -68,6 +67,14 @@ function displayForecast(response) {
       </div>
       `;
   }
+}
+
+function search(city) {
+  let apiKey = "d2b4efd6e0f5423f450f89aaf0181665";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+
 }
 
 function handleSubmit(event) {
@@ -85,16 +92,28 @@ function displayFahrenheitTemperature(event) {
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
-function changeBackground() {
-  let backgroundImageElement = document.querySelector("#background-image");
-  let date = new Date();
-  let hours = date.getHours();
-  if (hours < 12) {
-    backgroundImageElement.setAttribute("");
-  } else if (hours < 20) {
-    backgroundImageElement.setAttribute("");
+function getWeatherIcon(value) {
+  let icon = value;
+
+  switch (value) {
+
+    case "Clear":
+      icon = "./assets/img/sunnyIcon.png";
+      break;
+    case "Clouds":
+      icon = "./assets/img/cloudyIcon.png";
+      break;
+    case "Rain":
+      icon = "./assets/img/rainyDayIcon.png";
+      break;
+    case "Thunderstorms":
+      icon = "./assets/img/thunderstormDayIcon.png";
+      break;
+    default:
+      icon = "./assets/img/sunnyIcon.png";
   }
 }
+
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
@@ -103,4 +122,3 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
 search("");
-changeBackground();
