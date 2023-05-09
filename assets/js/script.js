@@ -1,4 +1,4 @@
-// ~ Date & Time ~
+
 
 function formatDate(timestamp) {
   let date = new Date(timestamp);
@@ -31,7 +31,6 @@ function formatHours(timestamp) {
 
   return `${hours}:${minutes}`;
 }
-// ~ Location & Temp Change ~
 
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temp");
@@ -63,7 +62,6 @@ function displayTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-// ~ Forecast ~
 
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
@@ -91,7 +89,6 @@ function displayForecast(response) {
   }
 }
 
-// ~ Search City ~
 
 function search(city) {
   let apiKey = "cda72f3c7c530e516513a2cf17943612";
@@ -108,7 +105,6 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-// ~ Celcius/Fahrenheit ~
 
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
@@ -127,30 +123,6 @@ function displayCelciusTemperature(event) {
   temperatureElement.innerHTML = Math.round(celciusTemperature);
 }
 
-// ~ Changing Background ~
-
-// function changeBackground() {
-//   let backgroundImageElement = document.querySelector("#background-image");
-//   let date = new Date();
-//   let hours = date.getHours();
-//   if (hours < 12) {
-//     backgroundImageElement.setAttribute(
-//       "src",
-//       "./images/backgroundImg.jpg"
-//     );
-//   // } else if (hours < 20) {
-//   //   backgroundImageElement.setAttribute(
-//   //     "src",
-//   //     "https://i.ibb.co/56Jyd9q/weatherbackground2.png"
-//   //   );
-//   // } else {
-//   //   backgroundImageElement.setAttribute(
-//   //     "src",
-//   //     "https://i.ibb.co/kJqVRNz/weatherbackground3.png"
-//   //   );
-//   }
-// }
-
 let celciusTemperature = null;
 
 let form = document.querySelector("#search-form");
@@ -163,4 +135,3 @@ let celciusLink = document.querySelector("#celcius-link");
 celciusLink.addEventListener("click", displayCelciusTemperature);
 
 search("Orlando");
-// changeBackground();
